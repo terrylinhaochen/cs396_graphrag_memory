@@ -1,0 +1,58 @@
+models:
+  default_chat_model:
+    azure_auth_type: api_key
+    type: ${GRAPHRAG_LLM_TYPE}
+    api_key: ${GRAPHRAG_API_KEY}
+    api_base: ${GRAPHRAG_API_BASE}
+    api_version: ${GRAPHRAG_API_VERSION}
+    deployment_name: ${GRAPHRAG_LLM_DEPLOYMENT_NAME}
+    model: ${GRAPHRAG_LLM_MODEL}
+    tokens_per_minute: ${GRAPHRAG_LLM_TPM}
+    requests_per_minute: ${GRAPHRAG_LLM_RPM}
+    model_supports_json: true
+    parallelization_num_threads: 50
+    parallelization_stagger: 0.3
+    async_mode: threaded
+  default_embedding_model:
+    azure_auth_type: api_key
+    type: ${GRAPHRAG_EMBEDDING_TYPE}
+    api_key: ${GRAPHRAG_API_KEY}
+    api_base: ${GRAPHRAG_API_BASE}
+    api_version: ${GRAPHRAG_API_VERSION}
+    deployment_name: ${GRAPHRAG_EMBEDDING_DEPLOYMENT_NAME}
+    model: ${GRAPHRAG_EMBEDDING_MODEL}
+    tokens_per_minute: ${GRAPHRAG_EMBEDDING_TPM}
+    requests_per_minute: ${GRAPHRAG_EMBEDDING_RPM}
+    parallelization_num_threads: 50
+    parallelization_stagger: 0.3
+    async_mode: threaded
+
+vector_store:
+  default_vector_store:
+    type: "azure_ai_search"
+    url: ${AZURE_AI_SEARCH_URL_ENDPOINT}
+    api_key: ${AZURE_AI_SEARCH_API_KEY}
+    container_name: "simple_text_ci"
+
+claim_extraction:
+  enabled: true
+
+embeddings:
+  model_id: "default_embedding_model"
+
+community_reports:
+  prompt: "prompts/community_report.txt"
+  max_length: 2000
+  max_input_length: 8000
+
+
+storage:
+  type: file
+  base_dir: "output"
+
+reporting:
+  type: file
+  base_dir: "logs"
+
+snapshots:
+  embeddings: True
